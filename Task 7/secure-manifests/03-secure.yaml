@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: 03-secure
+  namespace: audit-zone
+spec:
+  containers:
+    - name: 03-secure
+      image: nginxinc/nginx-unprivileged
+      securityContext:
+        privileged: false
+        runAsNonRoot: true
+        runAsUser: 101
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+            - ALL

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: 02-secure
+  namespace: audit-zone
+spec:
+  containers:
+    - name: 02-secure
+      image: nginxinc/nginx-unprivileged
+      securityContext:
+        privileged: false
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+            - ALL
+      volumeMounts:
+        - mountPath: /foo
+          name: example-volume
+          readOnly: true
+  volumes:
+    - name: example-volume
+      emptyDir: {}

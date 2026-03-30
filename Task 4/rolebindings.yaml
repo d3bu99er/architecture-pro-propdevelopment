@@ -1,0 +1,44 @@
+# rolebindings.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: prod
+  name: admin-binding
+subjects:
+- kind: ServiceAccount
+  name: admin
+  namespace: prod
+roleRef:
+  kind: Role
+  name: admin-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: prod
+  name: devops-binding
+subjects:
+- kind: ServiceAccount
+  name: devops
+  namespace: prod
+roleRef:
+  kind: Role
+  name: devops-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: prod
+  name: manager-binding
+subjects:
+- kind: ServiceAccount
+  name: manager
+  namespace: prod
+roleRef:
+  kind: Role
+  name: manager-role
+  apiGroup: rbac.authorization.k8s.io
