@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-pod
+  namespace: gatekeeper-test
+spec:
+  containers:
+    - name: bad
+      image: nginx
+      securityContext:
+        privileged: true
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+      volumeMounts:
+        - name: host-vol
+          mountPath: /host
+  volumes:
+    - name: host-vol
+      hostPath:
+        path: /
